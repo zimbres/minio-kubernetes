@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minio
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`minio.internal.zimbres.com`)
+    kind: Rule
+    services:
+    - name: minio
+      port: 9000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minio-console
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`minio-console.internal.zimbres.com`)
+    kind: Rule
+    services:
+    - name: minio-console
+      port: 9001
